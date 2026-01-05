@@ -9,3 +9,6 @@
 ## 運行環境  
 PHP 7.4  
 MySQL 5.7  
+
+
+本項目使用 PHPMailer ，基於 PHP License 授權。
