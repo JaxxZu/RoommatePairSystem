@@ -1,0 +1,463 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- 主機： localhost
+-- 產生時間： 2024 年 01 月 12 日 05:34
+-- 伺服器版本： 5.7.43-log
+-- PHP 版本： 7.4.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- 資料庫： `rsp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `msg`
+--
+
+CREATE TABLE `msg` (
+  `w_water_id` int(11) NOT NULL,
+  `msg_type` tinyint(4) NOT NULL COMMENT 'blue=2,red=4,green=8',
+  `add_to_t_id` int(11) NOT NULL,
+  `ask_to_t_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `room`
+--
+
+CREATE TABLE `room` (
+  `r_type` varchar(2) NOT NULL,
+  `r_num` smallint(6) NOT NULL,
+  `r_people_num` int(11) NOT NULL DEFAULT '4'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `room`
+--
+
+INSERT INTO `room` (`r_type`, `r_num`, `r_people_num`) VALUES
+('AA', 401, 2),
+('AA', 402, 2),
+('AA', 403, 2),
+('AA', 404, 2),
+('AA', 405, 2),
+('AA', 406, 2),
+('AA', 407, 2),
+('AA', 408, 2),
+('AA', 409, 2),
+('AA', 410, 2),
+('AA', 411, 2),
+('AA', 412, 2),
+('AA', 413, 2),
+('AA', 414, 2),
+('AA', 415, 2),
+('AA', 416, 2),
+('AA', 417, 2),
+('AA', 418, 2),
+('AA', 419, 2),
+('AA', 420, 2),
+('KK', 101, 6),
+('KK', 102, 6),
+('KK', 103, 6),
+('KK', 104, 6),
+('KK', 105, 6),
+('KK', 106, 6),
+('KK', 107, 6),
+('KK', 108, 6),
+('KK', 109, 6),
+('KK', 110, 6),
+('KK', 201, 6),
+('KK', 202, 6),
+('KK', 203, 6),
+('KK', 204, 6),
+('KK', 205, 6),
+('KK', 206, 6),
+('KK', 207, 6),
+('KK', 208, 6),
+('KK', 209, 6),
+('KK', 210, 6),
+('KK', 301, 6),
+('KK', 302, 6),
+('KK', 303, 6),
+('KK', 304, 6),
+('KK', 305, 6),
+('KK', 306, 6),
+('KK', 307, 6),
+('KK', 308, 6),
+('KK', 309, 6),
+('KK', 310, 6),
+('KK', 401, 6),
+('KK', 402, 6),
+('KK', 403, 6),
+('KK', 404, 6),
+('KK', 405, 6),
+('KK', 406, 6),
+('KK', 407, 6),
+('KK', 408, 6),
+('KK', 409, 6),
+('KK', 410, 6);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `student`
+--
+
+CREATE TABLE `student` (
+  `s_id` varchar(8) NOT NULL,
+  `masked_id` varchar(9) DEFAULT NULL,
+  `line_id` varchar(50) DEFAULT NULL,
+  `tg_us` varchar(50) DEFAULT NULL,
+  `ig_us` varchar(50) DEFAULT NULL,
+  `discord_us` varchar(50) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `roomtype` varchar(2) DEFAULT NULL,
+  `self_intro` text CHARACTER SET utf8mb4,
+  `t_id` int(11) DEFAULT NULL,
+  `turn_on_ac` tinyint(4) DEFAULT NULL COMMENT '開冷氣人數，1-4',
+  `ac_temp_low` tinyint(4) DEFAULT NULL COMMENT '期待冷氣溫度_低溫',
+  `ac_temp_high` tinyint(4) DEFAULT NULL COMMENT '期待冷氣溫度_高溫',
+  `is_smoke` tinyint(1) DEFAULT NULL,
+  `want_smoke` tinyint(1) DEFAULT NULL,
+  `is_bring_people` tinyint(1) DEFAULT NULL,
+  `want_bring_people` tinyint(4) DEFAULT NULL,
+  `country` varchar(87) DEFAULT NULL,
+  `want_country` varchar(87) DEFAULT NULL,
+  `phone_call` tinyint(4) DEFAULT NULL,
+  `want_phone_call` tinyint(4) DEFAULT NULL,
+  `department` int(2) DEFAULT NULL,
+  `monday_HH_s` tinyint(4) DEFAULT NULL,
+  `monday_MM_s` tinyint(4) DEFAULT NULL,
+  `monday_HH_e` tinyint(4) DEFAULT NULL,
+  `monday_MM_e` tinyint(4) DEFAULT NULL,
+  `sunday_HH_s` tinyint(4) DEFAULT NULL,
+  `sunday_MM_s` tinyint(4) DEFAULT NULL,
+  `sunday_HH_e` tinyint(4) DEFAULT NULL,
+  `sunday_MM_e` tinyint(4) DEFAULT NULL,
+  `monday_HH_s_want` tinyint(4) DEFAULT NULL,
+  `monday_MM_e_want` tinyint(4) DEFAULT NULL,
+  `sunday_HH_s_want` tinyint(4) DEFAULT NULL,
+  `sunday_MM_e_want` tinyint(4) DEFAULT NULL,
+  `is_e` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `student`
+--
+
+INSERT INTO `student` (`s_id`, `masked_id`, `line_id`, `tg_us`, `ig_us`, `discord_us`, `email`, `roomtype`, `self_intro`, `t_id`, `turn_on_ac`, `ac_temp_low`, `ac_temp_high`, `is_smoke`, `want_smoke`, `is_bring_people`, `want_bring_people`, `country`, `want_country`, `phone_call`, `want_phone_call`, `department`, `monday_HH_s`, `monday_MM_s`, `monday_HH_e`, `monday_MM_e`, `sunday_HH_s`, `sunday_MM_s`, `sunday_HH_e`, `sunday_MM_e`, `monday_HH_s_want`, `monday_MM_e_want`, `sunday_HH_s_want`, `sunday_MM_e_want`, `is_e`) VALUES
+('a1085548', 'ig10l6h', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1085549', 'j9600s3', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1095524', '8cr3pem', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1095543', '62gcqa7', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1101254', '8jtuuhw', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1105533', '5w714kt', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115501', 'qgodl6', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115502', '37uo195', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115503', '5or9816', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115504', '88nmch9', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115505', 'apk7jjp', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115506', 'd7176tt', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115507', 'e06bm4u', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115508', 'gh2oqag', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115509', 'j12s17t', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115510', '15hdo5', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115511', 'ralslq', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115512', '3b727e9', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115513', '5s3kegp', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115514', '89hk1qt', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115515', 'aqe58tc', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 21, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115516', 'daaidcd', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 22, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115517', 'fr73k4r', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115518', 'ghtmfuv', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115519', 'j1q7n0g', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 25, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115520', '4f0mfo', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115521', '2lbdqvp', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 27, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115522', '3egi8tb', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 28, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115523', '5suhtgu', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115524', '8cr33jq', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 30, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115525', 'atng7pc', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 31, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115526', 'ddk1eru', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115527', 'fs119ov', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115528', 'gl65omh', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 34, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115529', 'j52it5i', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 35, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115530', '7obsv8', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 36, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115531', '2m5gis7', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 37, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115532', '3fafvgq', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 38, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115533', '5w715jb', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115534', '8g3e9ou', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 40, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115535', 'auhiwvv', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 41, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115536', 'dedw44h', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 42, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115537', 'fvahb70', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 43, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115538', 'if6ufn1', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115539', 'j5tldpi', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 45, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115540', '8i9avs', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 46, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115541', '2peri1b', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115542', '59b7m6u', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 48, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115543', '62gc4ev', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115544', '8gubp2h', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115545', 'b0qtvri', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 51, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115546', 'dhnaake', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 52, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115547', 'g1jshlh', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 53, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115548', 'ig0s503', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 54, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115549', 'j95wk84', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 55, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115550', 'brpjnc', NULL, NULL, NULL, NULL, NULL, 'AA', NULL, 56, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('a1115551', '2so5o6d', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 57, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('admin', '0', '', '', '', '', 'ooooo@linkedlist.link', NULL, '宿舍組隊時間： 7/15 ~ 8/20\n逾時未組隊者將隨機分配宿舍\n查詢電話： 0755-555-555 （週一至週五 08:30~17:30）', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('w1125501', 'qgoeip', NULL, NULL, NULL, NULL, NULL, 'KK', NULL, 58, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `team`
+--
+
+CREATE TABLE `team` (
+  `t_water_id` int(11) NOT NULL,
+  `r_type` varchar(2) DEFAULT NULL,
+  `r_id` int(11) DEFAULT NULL,
+  `t_id` int(11) NOT NULL,
+  `masked_id` varchar(9) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `team`
+--
+
+INSERT INTO `team` (`t_water_id`, `r_type`, `r_id`, `t_id`, `masked_id`) VALUES
+(1, 'AA', NULL, 1, 'ig10l6h'),
+(2, 'KK', NULL, 2, 'j9600s3'),
+(3, 'AA', NULL, 3, '8cr3pem'),
+(4, 'KK', NULL, 4, '62gcqa7'),
+(5, 'AA', NULL, 5, '8jtuuhw'),
+(6, 'AA', NULL, 6, '5w714kt'),
+(7, 'KK', NULL, 7, 'qgodl6'),
+(8, 'KK', NULL, 8, '37uo195'),
+(9, 'KK', NULL, 9, '5or9816'),
+(10, 'KK', NULL, 10, '88nmch9'),
+(11, 'AA', NULL, 11, 'apk7jjp'),
+(12, 'AA', NULL, 12, 'd7176tt'),
+(13, 'KK', NULL, 13, 'e06bm4u'),
+(14, 'AA', NULL, 14, 'gh2oqag'),
+(15, 'KK', NULL, 15, 'j12s17t'),
+(16, 'AA', NULL, 16, '15hdo5'),
+(17, 'AA', NULL, 17, 'ralslq'),
+(18, 'KK', NULL, 18, '3b727e9'),
+(19, 'KK', NULL, 19, '5s3kegp'),
+(20, 'KK', NULL, 20, '89hk1qt'),
+(21, 'KK', NULL, 21, 'aqe58tc'),
+(22, 'AA', NULL, 22, 'daaidcd'),
+(23, 'AA', NULL, 23, 'fr73k4r'),
+(24, 'KK', NULL, 24, 'ghtmfuv'),
+(25, 'AA', NULL, 25, 'j1q7n0g'),
+(26, 'KK', NULL, 26, '4f0mfo'),
+(27, 'AA', NULL, 27, '2lbdqvp'),
+(28, 'AA', NULL, 28, '3egi8tb'),
+(29, 'KK', NULL, 29, '5suhtgu'),
+(30, 'KK', NULL, 30, '8cr33jq'),
+(31, 'KK', NULL, 31, 'atng7pc'),
+(32, 'KK', NULL, 32, 'ddk1eru'),
+(33, 'AA', NULL, 33, 'fs119ov'),
+(34, 'AA', NULL, 34, 'gl65omh'),
+(35, 'KK', NULL, 35, 'j52it5i'),
+(36, 'AA', NULL, 36, '7obsv8'),
+(37, 'KK', NULL, 37, '2m5gis7'),
+(38, 'AA', NULL, 38, '3fafvgq'),
+(39, 'AA', NULL, 39, '5w715jb'),
+(40, 'KK', NULL, 40, '8g3e9ou'),
+(41, 'KK', NULL, 41, 'auhiwvv'),
+(42, 'KK', NULL, 42, 'dedw44h'),
+(43, 'KK', NULL, 43, 'fvahb70'),
+(44, 'AA', NULL, 44, 'if6ufn1'),
+(45, 'AA', NULL, 45, 'j5tldpi'),
+(46, 'KK', NULL, 46, '8i9avs'),
+(47, 'AA', NULL, 47, '2peri1b'),
+(48, 'KK', NULL, 48, '59b7m6u'),
+(49, 'AA', NULL, 49, '62gc4ev'),
+(50, 'AA', NULL, 50, '8gubp2h'),
+(51, 'KK', NULL, 51, 'b0qtvri'),
+(52, 'KK', NULL, 52, 'dhnaake'),
+(53, 'KK', NULL, 53, 'g1jshlh'),
+(54, 'KK', NULL, 54, 'ig0s503'),
+(55, 'AA', NULL, 55, 'j95wk84'),
+(56, 'AA', NULL, 56, 'brpjnc'),
+(57, 'KK', NULL, 57, '2so5o6d'),
+(58, 'KK', NULL, 58, 'qgoeip');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `user`
+--
+
+CREATE TABLE `user` (
+  `username` varchar(8) NOT NULL,
+  `password_salted` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `user`
+--
+
+INSERT INTO `user` (`username`, `password_salted`) VALUES
+('a1085548', '77bd0c38a941a8c568e9cd5f0a656cfa'),
+('a1085549', '27fd640ba99301fa244d1d1f6bc207d8'),
+('a1095524', '2381c3d51e373b083ca8bdbfcc8ea69d'),
+('a1095543', '5669b7806b845fc0c36c4aa27f3831df'),
+('a1101254', 'caecd1b23e943522d0367f5f8b4abb6e'),
+('a1105533', 'd115f8cd08480d67b0dc8de084d82892'),
+('a1115501', '19bec8105344fa7edd8f99d2c904eb3e'),
+('a1115502', 'e031adca4eb9a73ead36adca8c972c56'),
+('a1115503', '4d636e32aa37ecc8461fb0b05a1936ad'),
+('a1115504', '824031b215e080d3aa366df343305d09'),
+('a1115505', '3d2ec1dd4bf1826961cedf9ab2f8f025'),
+('a1115506', '8f53ecffc980fadc6f14ede63dee2175'),
+('a1115507', 'd43f9b1cbe1abe7fe9280c4cebba7fc8'),
+('a1115508', '59ec5aac9fde8400c1cb91cb53394886'),
+('a1115509', 'ceeddac73f814cc0f55a21e73186f9f2'),
+('a1115510', '9d03ed9519abcac7433ae2a6b60bee50'),
+('a1115511', '1c84ef37612b53903b2a44ece1366db2'),
+('a1115512', '9c3d95979b80900a741be76678feeb9f'),
+('a1115513', '12ae797c0fd6a1501fa70ceafdc090ed'),
+('a1115514', '7f0b05637c450281db2498b359c6068a'),
+('a1115515', 'c8eeb90ee147c74209dbae28c1be3d79'),
+('a1115516', '74088606a1cce25743b374fe1629118c'),
+('a1115517', '0250e3fe00a9fe6e0408efe3bd9813ac'),
+('a1115518', 'fd42cf02ccbbc4b385293684ae8ff930'),
+('a1115519', '7f12c0d502fa610524eb0b0ee335044d'),
+('a1115520', '68c3da5c14db605ebdfe4d681ee6e07f'),
+('a1115521', '0ab11d89059faf777d450d31e2753802'),
+('a1115522', 'b02816db063407209412b3f683817e1c'),
+('a1115523', 'a3ca0d0984cdbcdc965fa628573ea05c'),
+('a1115524', '1c70570c2a20860db17156f06c35f829'),
+('a1115525', 'a14813e10e7c05b6f581354708b6f947'),
+('a1115526', '2f73723c57430be5006db95c97aa2177'),
+('a1115527', '9091148a61121ff09aed5b19427175b8'),
+('a1115528', '5e1a3cb778175b584a50e318d30f4003'),
+('a1115529', '7812e63c7038dc9b338371aed0f90e6a'),
+('a1115530', '456700cc9279f115a075a327337fea21'),
+('a1115531', '48ece3b8d672b7f54af102930f2604d1'),
+('a1115532', 'cb14317a4b5a40461a693bd9fe7b0001'),
+('a1115533', '722a70cc6abaa5810b94109918ba5291'),
+('a1115534', 'c1a853a207f43d2e503da23e34ed1ced'),
+('a1115535', '62b8b953bf929596778856a2e1c7b376'),
+('a1115536', '9ccd7e89ba9df47e3f79351dae87be51'),
+('a1115537', '9123ea448d619fd223abe23bdfcf4b02'),
+('a1115538', '182f8c3642bfedfb05116f1a6d76b874'),
+('a1115539', 'b3a6bd1f7ee23da1c1d6239709d53c3e'),
+('a1115540', '01e6b1625dc515803cc540f90e14f104'),
+('a1115541', '148468dc7614b7e061f7f700ec61e0a1'),
+('a1115542', '6cdcdb08a42a50fa4a5282e83f951aff'),
+('a1115543', 'eff62d2e19965024d0dbb137a8e8bc50'),
+('a1115544', 'c0f95f1dee9292b419f361971b74fb8c'),
+('a1115545', '35be1dc4c0f8802e2991df151bea3965'),
+('a1115546', '8e7a05bb41644d2b73a4fb91e9c9e616'),
+('a1115547', '25c8e1049c322e2b166a61b77a090fa3'),
+('a1115548', 'c043162480a932d3edd5e81a9f7924bd'),
+('a1115549', 'c9a9f66704881e4164d52114c1844305'),
+('a1115550', '72cdf5aaf62a2bb7e5a4e61aaf3053ad'),
+('a1115551', 'e04330485c0610747737704a82d12eb4'),
+('admin', '7099fad7a8ce9a660565e0cec6256a7a79d77e25c33ce83a72495d836c62825a'),
+('w1125501', '235a1136ffed2eace15f1b51317ec4e1');
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `msg`
+--
+ALTER TABLE `msg`
+  ADD PRIMARY KEY (`w_water_id`),
+  ADD KEY `t_id` (`add_to_t_id`),
+  ADD KEY `w_std_mask_id` (`msg_type`),
+  ADD KEY `ask_to_t_id` (`ask_to_t_id`);
+
+--
+-- 資料表索引 `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`r_type`,`r_num`);
+
+--
+-- 資料表索引 `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`s_id`),
+  ADD UNIQUE KEY `masked_id` (`masked_id`),
+  ADD KEY `roomtype` (`roomtype`);
+
+--
+-- 資料表索引 `team`
+--
+ALTER TABLE `team`
+  ADD PRIMARY KEY (`t_water_id`),
+  ADD KEY `s1` (`masked_id`),
+  ADD KEY `t_id` (`t_id`),
+  ADD KEY `r_type` (`r_type`,`r_id`);
+
+--
+-- 資料表索引 `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `msg`
+--
+ALTER TABLE `msg`
+  MODIFY `w_water_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- 已傾印資料表的限制式
+--
+
+--
+-- 資料表的限制式 `msg`
+--
+ALTER TABLE `msg`
+  ADD CONSTRAINT `msg_ibfk_1` FOREIGN KEY (`add_to_t_id`) REFERENCES `team` (`t_id`),
+  ADD CONSTRAINT `msg_ibfk_2` FOREIGN KEY (`ask_to_t_id`) REFERENCES `team` (`t_id`);
+
+--
+-- 資料表的限制式 `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`roomtype`) REFERENCES `room` (`r_type`);
+
+--
+-- 資料表的限制式 `team`
+--
+ALTER TABLE `team`
+  ADD CONSTRAINT `team_ibfk_2` FOREIGN KEY (`r_type`) REFERENCES `room` (`r_type`),
+  ADD CONSTRAINT `team_ibfk_3` FOREIGN KEY (`masked_id`) REFERENCES `student` (`masked_id`);
+
+--
+-- 資料表的限制式 `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`username`) REFERENCES `student` (`s_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
