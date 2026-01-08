@@ -104,5 +104,5 @@ MySQL 5.7
  
  
 Developed with ♥︎ by Jaxx  
-Powered by Bootstrap, PHPMailer, and Jin Xuan Oolong.  
+Powered by Bootstrap, PHPMailer and Jin Xuan Oolong.  
 本項目使用 [PHPMailer](https://github.com/PHPMailer/PHPMailer) ，基於 LGPL-2.1 授權。
