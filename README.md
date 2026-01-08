@@ -14,8 +14,78 @@
 
 
 ## 資料庫結構
-<img width="1221" height="801" alt="image" src="https://github.com/user-attachments/assets/a5ada020-acaa-4bfc-a5a8-3dc4912e6971" />
+<img width="1221" height="801" alt="image" src="https://github.com/user-attachments/assets/a5ada020-acaa-4bfc-a5a8-3dc4912e6971" />  
 
+### 1. student 表  
+
+| 欄位名稱                  | 允許空 | 預設值 | 資料類型       | 說明                                                                 |
+|---------------------------|--------|--------|----------------|----------------------------------------------------------------------|
+| s_id                      | 否     |        | varchar(8)     | 學號，例如 a1115555                                                  |
+| line_id                   | 是     | NULL   | varchar(50)    | Line ID，例如 @demouser                                              |
+| tg_us                     | 是     | NULL   | varchar(50)    | Telegram username，例如 @demouser                                    |
+| ig_us                     | 是     | NULL   | varchar(50)    | Instagram username，例如 @demouser                                   |
+| discord_us                | 是     | NULL   | varchar(50)    | Discord username，例如 @demouser                                     |
+| roomtype                  | 是     | NULL   | varchar(2)     | 宿舍類型，OB/OA=學一，OE/OF=學二，B1=綜合                             |
+| self_intro                | 是     | NULL   | text           | 使用者自己填寫的自我介紹                                             |
+| t_id                      | 是     | NULL   | int(11)        | 如果有組隊，隊伍的 t_id，無時=0                                      |
+| is_smoke                  | 是     | NULL   | tinyint(1)     | 吸菸=1，不抽=0                                                        |
+| want_smoke                | 是     | NULL   | tinyint(4)     | 不想要抽菸的室友=0，無所謂=1，想要吸菸的室友=1                        |
+| is_bring_people           | 是     | NULL   | tinyint(1)     | 經常帶人進房間=3，偶爾帶=2，最少帶=1，完全不帶=0                     |
+| want_bring_people         | 是     | NULL   | tinyint(4)     | 最高接受室友帶人進房間的程度：經常=3，偶爾帶=2，最少帶=1，完全不帶=0 |
+| sleep_time_weekend        | 是     | NULL   | time           | 假日放假的話，幾點睡                                                |
+| want_sleep_time_weekend   | 是     | NULL   | time           | 想要找假日放假的話，幾點睡的室友，無所謂=17:55:55                     |
+| sleep_time_monday         | 是     | NULL   | time           | 上課的話，幾點睡                                                    |
+| want_sleep_time_monday    | 是     | NULL   | time           | 想要找上課的話，幾點睡的室友，無所謂=17:55:55                         |
+| country                   | 是     | NULL   | varchar(10)    | 國籍，由使用者填寫                                                   |
+| want_country              | 是     | NULL   | varchar(10)    | 可以接受的室友的國籍，使用者填寫                                     |
+| phone_call                | 是     | NULL   | tinyint(4)     | 經常在房間打電話=3，偶爾打=2，最少打=1，完全不打=0                   |
+| want_phone_call           | 是     | NULL   | tinyint(4)     | 最高接受室友在房間打電話的程度：經常=3，偶爾=2，最少=1，完全不打=0   |
+| department                | 是     | NULL   | int(2)         | 自己的學系編號，例如電機系=51                                        |
+| want_department           | 是     | NULL   | varchar(30)    | 想要室友是什麼學系，使用者填寫                                       |
+
+### 2. user 表格（登入帳號）
+
+| 欄位名稱           | 允許空 | 預設值 | 資料類型       | 說明                                      |
+|--------------------|--------|--------|----------------|-------------------------------------------|
+| username           | 否     |        | varchar(8)     | 使用者名稱，管理員=admin，學生=[學號]      |
+| password_salted    | 否     |        | varchar(64)    | 加鹽哈希保存        |
+
+
+### 3. room 表  
+
+| 欄位名稱   | 允許空 | 預設值 | 資料類型      | 說明                                              |
+|------------|--------|--------|---------------|---------------------------------------------------|
+| roomtype   | 否     |        | varchar(2)    | 宿舍類型，OB/OA=學一，OE/OF=學二，B1=綜合         |
+| r_id       | 否     |        | int(11)       | 房號，例如 101                                    |
+| t_id       | 是     | NULL   | int(11)       | 宿舍被哪隊佔用了，未被佔用=NULL                   |
+
+### 4. team 表  
+
+| 欄位名稱   | 允許空 | 預設值 | 資料類型       | 說明                          |
+|------------|--------|--------|----------------|-------------------------------|
+| t_id       | 否     |        | int(11)        | 隊伍編號                      |
+| s1         | 否     | 0      | varchar(8)     | 隊員1的學號，無則為0          |
+| s2         | 否     | 0      | varchar(8)     | 隊員2的學號，無則為0          |
+| s3         | 否     | 0      | varchar(8)     | 隊員3的學號，無則為0          |
+| s4         | 否     | 0      | varchar(8)     | 隊員4的學號，無則為0          |
+
+### 5. waiting_join 表  
+
+| 欄位名稱     | 允許空 | 預設值 | 資料類型       | 說明                                                                                  |
+|--------------|--------|--------|----------------|---------------------------------------------------------------------------------------|
+| w_id         | 否     |        | int(11)        | 等待的編號                                                                            |
+| w_student    | 否     |        | varchar(8)     | 被等待加入隊伍的學生的學號                                                            |
+| t_id         | 否     |        | int(11)        | 被 w_student 等待加入的隊伍的編號                                                     |
+| t_s1         | 否     | 0      | varchar(8)     | 已於隊伍中的學生的學號，同意加入後改為0                                               |
+| t_s2         | 否     | 0      | varchar(8)     | 同上（實務上 t_s1/t_s2 不一定順序）                                                   |
+| t_s3         | 否     | 0      | varchar(8)     | 同上                                                                                  |
+
+### 範例說明
+- A1119944 申請加入隊伍27，請求現有隊員 A1119933 及 A1119922 同意  
+  → `w_student = A1119944`, `t_s1 = A1119922`, `t_s2 = A1119933`
+
+- A1119977 邀請 A1119866 組隊（兩人都無隊伍）  
+  → 系統創建新隊伍 t_id=47，`w_student = A1119866`, `t_s1 = A1119866`, `t_id = 47`
 
 ## 運行環境  
 PHP 7.4  
